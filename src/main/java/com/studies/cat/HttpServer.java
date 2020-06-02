@@ -1,5 +1,8 @@
 package com.studies.cat;
 
+import com.studies.cat.processor.ServletProcessor;
+import com.studies.cat.processor.StaticResourceProcessor;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +21,6 @@ import java.net.UnknownHostException;
  */
 
 public class HttpServer {
-    //静态目录位置
-    public static final String webRoot  = System.getProperty("user.dir")+ File.separator+"webroot";
     //关闭命令
     private String shutdownCommand = "/shutdown";
     //默认开启状态
@@ -63,7 +64,18 @@ public class HttpServer {
                 Response response = new Response(outputStream);
                 response.setRequest(request);
                 //sendData 要区分是静态资源文件；还是数据返回（需要到Controller层）
-                response.sendData();
+                //response.sendData();
+                //此处不在直接调用Response的sendData方法进行数据的返回
+
+                //检测是servlet请求还是静态资源请求
+                if(request.getUri().startsWith("/servlet/")){
+                    ServletProcessor servletProcessor = new ServletProcessor();
+                    servletProcessor.process(request,response);
+                }else{
+                    StaticResourceProcessor staticResourceProcessor = new StaticResourceProcessor();
+                    staticResourceProcessor.process(request,response);
+                }
+
                 //用完socket后将其关闭
                 socket.close();
             }catch(Exception e){
