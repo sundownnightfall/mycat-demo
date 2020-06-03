@@ -3,7 +3,6 @@ package com.studies.cat;
 import com.studies.cat.processor.ServletProcessor;
 import com.studies.cat.processor.StaticResourceProcessor;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
