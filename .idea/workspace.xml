@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d1230a8-49b2-4e42-932f-a6db3fb05e0f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mycat-demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mycat-demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studies/cat/HttpServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/studies/cat/HttpServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studies/cat/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/studies/cat/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studies/cat/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/studies/cat/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/studies/cat/biji" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/studies/cat/biji" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/MyDSServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/com/studies/cat/HttpServer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/com/studies/cat/Request.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/com/studies/cat/Response.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/com/studies/cat/biji" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/com/studies/cat/constant/Constant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/com/studies/cat/processor/ServletProcessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/com/studies/cat/processor/StaticResourceProcessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/com/studies/cat/test/MyServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webroot/index.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,11 +49,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/mycat-demo.iml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+            <state relative-caret-position="300">
+              <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -97,15 +91,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="296">
               <caret line="47" selection-start-line="47" selection-end-line="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="11" selection-start-column="11" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -143,6 +128,7 @@
         <option value="$PROJECT_DIR$/src/com/studies/cat/constant/Constant.java" />
         <option value="$PROJECT_DIR$/src/MyDSServlet.java" />
         <option value="$PROJECT_DIR$/src/com/studies/cat/HttpServer.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -171,17 +157,6 @@
               <item name="mycat-demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="mycat-demo" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="mycat-demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mycat-demo" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mycat-demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mycat-demo" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-              <item name="inspectionProfiles" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -203,12 +178,13 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\mycat-demo\src" />
-      <recent name="E:\mycat-demo\src\com\studies\cat\test" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\mycat-demo\webroot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\mycat-demo" />
+      <recent name="E:\mycat-demo\src" />
+      <recent name="E:\mycat-demo\src\com\studies\cat\test" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -250,12 +226,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9064000" />
+    <option name="totallyTimeSpent" value="9598000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -274,7 +251,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32962137" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Messages" order="12" visible="true" weight="0.32962137" />
+      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.32962137" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -407,10 +384,20 @@
     <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/mycat-demo.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        <state relative-caret-position="300">
+          <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
         </state>
       </provider>
     </entry>

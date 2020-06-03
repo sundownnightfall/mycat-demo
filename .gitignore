@@ -1,4 +1,5 @@
 /target/
+/webroot/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
