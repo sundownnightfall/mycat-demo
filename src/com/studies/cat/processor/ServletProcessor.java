@@ -1,15 +1,12 @@
 package com.studies.cat.processor;
 
-import com.studies.cat.HttpServer;
 import com.studies.cat.Request;
 import com.studies.cat.Response;
 import com.studies.cat.constant.Constant;
 import com.studies.cat.facade.RequestFacade;
 import com.studies.cat.facade.ResponseFacade;
 
-import javax.print.DocFlavor;
 import javax.servlet.Servlet;
-import javax.servlet.ServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;

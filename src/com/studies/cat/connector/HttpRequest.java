@@ -1,70 +1,158 @@
-package com.studies.cat;
+package com.studies.cat.connector;
+
+import com.studies.cat.Request;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
-import javax.servlet.ServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
 /**
  * @author： yangh
- * 请求对象 ：是对Socket.InputStream的处理
- * @date： Created on 2020/6/2 8:53
+ * @date： Created on 2020/6/3 14:01
  * @version： v1.0
  * @modified By:
  */
-
-public class Request implements ServletRequest {
+//http协议的Request类
+public class HttpRequest implements HttpServletRequest {
     private InputStream inputStream;
 
-    private String uri;
-
-    public Request() {
-    }
-
-    public Request(InputStream inputStream){
+    public HttpRequest(InputStream inputStream) {
         this.inputStream = inputStream;
     }
-    //    GET /index.html HTTP/1.1 \r\n
-    //    Host: 127.0.0.1:8080
-    //    Connection: keep-alive
-    //    Cache-Control: max-age=0
-    //    Upgrade-Insecure-Requests: 1
-    //    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36
-    //    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-    //    Sec-Fetch-Site: cross-site
-    //    Sec-Fetch-Mode: navigate
-    //    Sec-Fetch-User: ?1
-    //    Sec-Fetch-Dest: document
-    //    Accept-Encoding: gzip, deflate, br
-    //    Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
-    public void parse() throws Exception{
-        //解析HTTP协议
-        byte[] bytes = new byte[1024];
-        //将数据读入到byte数组中
-        inputStream.read(bytes);
-        String string = new String(bytes);
-        uri = parseUri(string);
 
-    }
-    public String getUri(){
-        return uri;
-    }
-    private String parseUri(String httpRequestString){
-        //Get index.html 200  协议形式
-        int indexStart = httpRequestString.indexOf(" ");
-        if(indexStart!=-1){
-            int indexEnd = httpRequestString.indexOf(" ",indexStart+1);
-            if(indexEnd>indexStart){
-                return httpRequestString.substring(indexStart+1,indexEnd);
-            }
-        }
+    @Override
+    public String getAuthType() {
         return null;
+    }
+
+    @Override
+    public Cookie[] getCookies() {
+        return new Cookie[0];
+    }
+
+    @Override
+    public long getDateHeader(String s) {
+        return 0;
+    }
+
+    @Override
+    public String getHeader(String s) {
+        return null;
+    }
+
+    @Override
+    public Enumeration getHeaders(String s) {
+        return null;
+    }
+
+    @Override
+    public Enumeration getHeaderNames() {
+        return null;
+    }
+
+    @Override
+    public int getIntHeader(String s) {
+        return 0;
+    }
+
+    @Override
+    public String getMethod() {
+        return null;
+    }
+
+    @Override
+    public String getPathInfo() {
+        return null;
+    }
+
+    @Override
+    public String getPathTranslated() {
+        return null;
+    }
+
+    @Override
+    public String getContextPath() {
+        return null;
+    }
+
+    @Override
+    public String getQueryString() {
+        return null;
+    }
+
+    @Override
+    public String getRemoteUser() {
+        return null;
+    }
+
+    @Override
+    public boolean isUserInRole(String s) {
+        return false;
+    }
+
+    @Override
+    public Principal getUserPrincipal() {
+        return null;
+    }
+
+    @Override
+    public String getRequestedSessionId() {
+        return null;
+    }
+
+    @Override
+    public String getRequestURI() {
+        return null;
+    }
+
+    @Override
+    public StringBuffer getRequestURL() {
+        return null;
+    }
+
+    @Override
+    public String getServletPath() {
+        return null;
+    }
+
+    @Override
+    public HttpSession getSession(boolean b) {
+        return null;
+    }
+
+    @Override
+    public HttpSession getSession() {
+        return null;
+    }
+
+    @Override
+    public boolean isRequestedSessionIdValid() {
+        return false;
+    }
+
+    @Override
+    public boolean isRequestedSessionIdFromCookie() {
+        return false;
+    }
+
+    @Override
+    public boolean isRequestedSessionIdFromURL() {
+        return false;
+    }
+
+    @Override
+    public boolean isRequestedSessionIdFromUrl() {
+        return false;
     }
 
     @Override

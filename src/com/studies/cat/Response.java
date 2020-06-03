@@ -20,6 +20,10 @@ public class Response implements ServletResponse {
     private OutputStream outputStream;
     //获取当前socket的request对象；可以方便response获取一些客户端传入的数据
     private Request request;
+
+    public Response() {
+    }
+
     public Response(OutputStream outputStream){
         this.outputStream = outputStream;
     }
