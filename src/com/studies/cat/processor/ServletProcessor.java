@@ -4,9 +4,12 @@ import com.studies.cat.HttpServer;
 import com.studies.cat.Request;
 import com.studies.cat.Response;
 import com.studies.cat.constant.Constant;
+import com.studies.cat.facade.RequestFacade;
+import com.studies.cat.facade.ResponseFacade;
 
 import javax.print.DocFlavor;
 import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -62,7 +65,14 @@ public class ServletProcessor {
         //实例化
         Servlet servletObject= (Servlet)serlveClass.newInstance();
 
-        //调用Servlet对象的service方法
-        servletObject.service(request,response);
+        //调用Servlet对象的service方法；为了不让用户看见自定义Request/Response的对象中的一些私密/不重要的东西；需要使用外观模式来进行对象的代理
+        //之所以这样做：是为了防止Servlet中；将request强转会我们自定义的Reuqest/Response对象；从而暴露了不必要的东西
+        //servletObject.service(request,response);//如果在service方法中进行将request对象强转成自定义的Request对象，回导致request对象的数据暴露
+        RequestFacade requestFacade = new RequestFacade(request);
+        ResponseFacade responseFacade = new ResponseFacade(response);
+        //现在在servlet.service服务中；不管怎么强转；可看见的信息始终都和ServletRequest/ServletResposne的一致；不会导致真正的request对象的数据暴露；
+        //门面类只是持有一个request/response对象，他本身不是request/response对象
+        servletObject.service(requestFacade,responseFacade);
+
     }
 }
