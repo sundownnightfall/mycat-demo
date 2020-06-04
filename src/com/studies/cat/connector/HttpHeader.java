@@ -1,5 +1,7 @@
 package com.studies.cat.connector;
 
+import java.util.Arrays;
+
 /**
  * @author： yangh
  * @date： Created on 2020/6/3 11:15
@@ -7,7 +9,7 @@ package com.studies.cat.connector;
  * @modified By:
  */
 
-final class HttpHeader {
+public final class HttpHeader {
 
 
     // -------------------------------------------------------------- Constants
@@ -255,6 +257,15 @@ final class HttpHeader {
         return false;
     }
 
-
+    @Override
+    public String toString() {
+        return "HttpHeader{" +
+                "name=" + Arrays.toString(name) +
+                ", nameEnd=" + nameEnd +
+                ", value=" + Arrays.toString(value) +
+                ", valueEnd=" + valueEnd +
+                ", hashCode=" + hashCode +
+                '}';
+    }
 }
 

@@ -1,6 +1,6 @@
-package com.studies.cat.connector;
+package com.studies.cat.facade;
 
-import com.studies.cat.Request;
+import com.studies.cat.connector.HttpRequest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
@@ -9,29 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Parameter;
-import java.net.Socket;
 import java.security.Principal;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author： yangh
- * @date： Created on 2020/6/3 14:01
+ * @date： Created on 2020/6/3 14:51
  * @version： v1.0
  * @modified By:
  */
-//http协议的Request类
-public class HttpRequest implements HttpServletRequest {
-    private HashMap header = new HashMap();
-    private ArrayList cookies = new ArrayList();
-    //private ParameterMap parameters;
-    private InputStream inputStream;
-    private ServletInputStream servletInputStream;
 
-    public HttpRequest(InputStream inputStream) {
-        this.inputStream = inputStream;
+public class HttpRequestFacade implements HttpServletRequest {
+    private HttpRequest httpRequest;
+    public HttpRequestFacade(HttpRequest httpRequest) {
+        this.httpRequest = httpRequest;
     }
 
     @Override
@@ -70,6 +64,11 @@ public class HttpRequest implements HttpServletRequest {
     }
 
     @Override
+    public String getMethod() {
+        return null;
+    }
+
+    @Override
     public String getPathInfo() {
         return null;
     }
@@ -84,7 +83,10 @@ public class HttpRequest implements HttpServletRequest {
         return null;
     }
 
-
+    @Override
+    public String getQueryString() {
+        return null;
+    }
 
     @Override
     public String getRemoteUser() {
@@ -98,6 +100,16 @@ public class HttpRequest implements HttpServletRequest {
 
     @Override
     public Principal getUserPrincipal() {
+        return null;
+    }
+
+    @Override
+    public String getRequestedSessionId() {
+        return null;
+    }
+
+    @Override
+    public String getRequestURI() {
         return null;
     }
 
@@ -197,6 +209,11 @@ public class HttpRequest implements HttpServletRequest {
     }
 
     @Override
+    public String getProtocol() {
+        return null;
+    }
+
+    @Override
     public String getScheme() {
         return null;
     }
@@ -279,92 +296,5 @@ public class HttpRequest implements HttpServletRequest {
     @Override
     public int getLocalPort() {
         return 0;
-    }
-    /**
-     * 请求参数字符串
-     */
-    private String queryString;
-    @Override
-    public String getQueryString() {
-        return this.queryString;
-    }
-
-    /**
-     * 自定义方法 设置请求参数字符串 从connector处
-     */
-    public void setQueryString(String queryString){
-        this.queryString = queryString;
-    }
-
-    private String requestURI;
-    @Override
-    public String getRequestURI() {
-        return this.requestURI;
-    }
-
-    /**
-     * 自定义方法-设置URI,从connector处
-     * @param requestURI
-     */
-    public void setRequestURI(String requestURI) {
-        this.requestURI = requestURI;
-    }
-
-    /**
-     * jsessionid
-     */
-    private String requestedSessionId;
-    /**
-     * jsessionid处理
-     * @return
-     */
-    @Override
-    public String getRequestedSessionId() {
-        return null;
-    }
-
-    /**
-     * 自定义方法--设置sessionid
-     * @param requestedSessionId
-     */
-    public void setRequestedSessionId(String requestedSessionId) {
-        this.requestedSessionId = requestedSessionId;
-    }
-
-    //自定义requestSessionURL属性
-    private Boolean requestSessionURL;
-
-    public Boolean getRequestSessionURL() {
-        return requestSessionURL;
-    }
-
-    public void setRequestSessionURL(Boolean requestSessionURL) {
-        this.requestSessionURL = requestSessionURL;
-    }
-
-    /**
-     * 请求类型
-     */
-    private String method;
-    @Override
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    /**
-     * 请求使用的协议
-     */
-    private String protocol;
-    @Override
-    public String getProtocol() {
-        return protocol;
-    }
-
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
     }
 }

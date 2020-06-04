@@ -1,5 +1,7 @@
 package com.studies.cat.connector;
 
+import java.util.Arrays;
+
 /**
  * @author： yangh
  * @date： Created on 2020/6/3 11:11
@@ -7,7 +9,7 @@ package com.studies.cat.connector;
  * @modified By:
  */
 
-final class HttpRequestLine {
+public final class HttpRequestLine {
 
 
     // -------------------------------------------------------------- Constants
@@ -85,7 +87,8 @@ final class HttpRequestLine {
 
 
     /**
-     * Test if the value of the header includes the given char array.
+     * 检测：一个字符串是否在另外一个字符串中；此处处理方式是将：被检索的字符串转换成字符数组，一个一个的和比较的数组进行对比
+     * 如果参照的数据，已经被检索的位置到其数组的结束位置之差，小于查找字符数组的长度则不需要进行了；肯定是不存在的
      */
     public int indexOf(char[] buf, int end) {
         char firstChar = buf[0];
@@ -121,7 +124,8 @@ final class HttpRequestLine {
 
 
     /**
-     * Returns the index of a character in the value.
+     * 遍历所有的uri,检测是否含有？；？是uri和请求参数的分隔符
+     * 例如 serlvet/myservlet?age=12&telephone=13112341234
      */
     public int indexOf(char c, int start) {
         for (int i=start; i<uriEnd; i++) {
@@ -146,5 +150,15 @@ final class HttpRequestLine {
         return false;
     }
 
-
+    @Override
+    public String toString() {
+        return "HttpRequestLine{" +
+                "method=" + Arrays.toString(method) +
+                ", methodEnd=" + methodEnd +
+                ", uri=" + Arrays.toString(uri) +
+                ", uriEnd=" + uriEnd +
+                ", protocol=" + Arrays.toString(protocol) +
+                ", protocolEnd=" + protocolEnd +
+                '}';
+    }
 }
