@@ -3,10 +3,13 @@ package com.studies.cat.processor;
 import com.studies.cat.connector.*;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.xml.ws.spi.http.HttpHandler;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author： yangh
@@ -39,12 +42,12 @@ public class HttpProcessor {
             httpResponse = new HttpResponse(outputStream);
             httpResponse.setHeader("server","yhong's server container");
             httpResponse.setHttpRequest(httpRequest);
-            /*
-            sendData 要区分是静态资源文件；还是数据返回（需要到Controller层）
-            response.sendData();
-            此处不在直接调用Response的sendData方法进行数据的返回
-            检测是servlet请求还是静态资源请求
-            */
+
+            //sendData 要区分是静态资源文件；还是数据返回（需要到Controller层）
+            //response.sendData();
+            //此处不在直接调用Response的sendData方法进行数据的返回
+            //检测是servlet请求还是静态资源请求
+
             if(httpRequest.getRequestURI().startsWith("/servlet/")){
                 HttpServletProcessor servletProcessor = new HttpServletProcessor();
                 servletProcessor.process(httpRequest,httpResponse);
@@ -164,13 +167,13 @@ public class HttpProcessor {
                     httpRequest.setRequestedSessionId(jsessionidValue);
                     otherSpecialParam=specialParameters.substring(index);
                 }
-                httpRequest.setRequestSessionURL(true);
+                httpRequest.setRequestedSessionIdFromURL(true);
                 //重新计算uri
                 requestURI = requestURI.substring(0,sessionPositon)+otherSpecialParam;
             }else{
                 //没有jsessionid时
                 httpRequest.setRequestedSessionId(null);
-                httpRequest.setRequestSessionURL(false);
+                httpRequest.setRequestedSessionIdFromURL(false);
             }
 
             //标准化URI
@@ -229,17 +232,52 @@ public class HttpProcessor {
                 }else if(headerName.equalsIgnoreCase("content-type")){
                     httpRequest.setContentType(headerValue);
                 }else if(headerName.equalsIgnoreCase("cookies")){
-
+                    Cookie[] cookies = getCookies(headerValue);
+                    //检测jsessionid是否在cookie中；如果存在就需要将其赋值到httpRequest对象中
+                    int cookieLength = cookies.length;
+                    for(int index=0;index<cookieLength;index++){
+                        if(cookies[index].getName().equalsIgnoreCase("jsessionid")){
+                            httpRequest.setRequestedSessionId(cookies[index].getValue());
+                            //设置jsession不在请求字符串中的表示；他在cookie中
+                            httpRequest.setRequestedSessionIdFromURL(false);
+                            httpRequest.setRequestedSessionIdFromCookie(true);
+                        }else{
+                            httpRequest.addCookie(cookies[index]);
+                        }
+                    }
                 }
            }
-
-
 
         }catch (IOException ioe){
             ioe.printStackTrace();
         }
 
     }
+
+    /**
+     * 解析出cookie
+     * @param cookieString
+     * @return
+     */
+    private Cookie[] getCookies(String cookieString){
+        if(cookieString==null ||cookieString.length()==0){
+            return new Cookie[0];
+        }
+        String[] cookieStr = cookieString.split(";");
+        List<Cookie> cookieList = new ArrayList<>();
+        int cookieStrLen = cookieStr.length;
+        for(int i=0;i<cookieStrLen;i++){
+            String[] singleCookie = cookieStr[i].split("=");
+            if(singleCookie.length==2){
+                cookieList.add(new Cookie(singleCookie[0],singleCookie[1]));
+            }else{
+                //cookie 键值对不完整；不进行创建
+            }
+
+        }
+        return cookieList.toArray(new Cookie[cookieList.size()]);
+    }
+
 
     /**
      * Return a context-relative path, beginning with a "/", that represents

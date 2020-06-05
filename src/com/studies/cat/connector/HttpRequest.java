@@ -25,7 +25,6 @@ import java.util.*;
 //http协议的Request类
 public class HttpRequest implements HttpServletRequest {
     private HashMap header = new HashMap();
-    private ArrayList cookies = new ArrayList();
     //private ParameterMap parameters;
     private InputStream inputStream;
     private ServletInputStream servletInputStream;
@@ -37,11 +36,6 @@ public class HttpRequest implements HttpServletRequest {
     @Override
     public String getAuthType() {
         return null;
-    }
-
-    @Override
-    public Cookie[] getCookies() {
-        return new Cookie[0];
     }
 
     @Override
@@ -123,16 +117,6 @@ public class HttpRequest implements HttpServletRequest {
 
     @Override
     public boolean isRequestedSessionIdValid() {
-        return false;
-    }
-
-    @Override
-    public boolean isRequestedSessionIdFromCookie() {
-        return false;
-    }
-
-    @Override
-    public boolean isRequestedSessionIdFromURL() {
         return false;
     }
 
@@ -321,15 +305,36 @@ public class HttpRequest implements HttpServletRequest {
         this.requestedSessionId = requestedSessionId;
     }
 
-    //自定义requestSessionURL属性
-    private Boolean requestSessionURL;
+//    老版本自定义requestSessionURL属性
+//    private Boolean requestSessionURL;
+//
+//    public Boolean getRequestSessionURL() {
+//        return requestSessionURL;
+//    }
+//
+//    public void setRequestSessionURL(Boolean requestSessionURL) {
+//        this.requestSessionURL = requestSessionURL;
+//    }
 
-    public Boolean getRequestSessionURL() {
-        return requestSessionURL;
+    //新版本--用来表示jsessionid是否是在请求的URL中的
+    private boolean isRequestedSessionIdFromURL;
+    @Override
+    public boolean isRequestedSessionIdFromURL() {
+        return isRequestedSessionIdFromURL;
     }
 
-    public void setRequestSessionURL(Boolean requestSessionURL) {
-        this.requestSessionURL = requestSessionURL;
+    public void setRequestedSessionIdFromURL(boolean requestedSessionIdFromURL) {
+        isRequestedSessionIdFromURL = requestedSessionIdFromURL;
+    }
+    //新版本--用来表示jsessionid是否是在请求的Cookie中的 ;旧版本为requestSeesionCookie
+    private boolean isRequestedSessionIdFromCookie;
+    @Override
+    public boolean isRequestedSessionIdFromCookie() {
+        return isRequestedSessionIdFromCookie;
+    }
+
+    public void setRequestedSessionIdFromCookie(boolean requestedSessionIdFromCookie) {
+        isRequestedSessionIdFromCookie = requestedSessionIdFromCookie;
     }
 
     /**
@@ -382,4 +387,19 @@ public class HttpRequest implements HttpServletRequest {
     public void setContentType(String contentType) {
         this.contentType = contentType;
     }
+    private List<Cookie> cookies = new ArrayList();
+
+    @Override
+    public Cookie[] getCookies() {
+        return cookies.toArray(new Cookie[cookies.size()]);
+    }
+
+    /**
+     * 添加cookie
+     * @param cookie
+     */
+    public void addCookie(Cookie cookie){
+        cookies.add(cookie);
+    }
+
 }
