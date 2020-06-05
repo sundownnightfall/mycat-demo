@@ -1,6 +1,7 @@
 package com.studies.cat.connector;
 
 import com.studies.cat.Request;
+import com.studies.cat.util.ParameterMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
@@ -11,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Parameter;
 import java.net.Socket;
 import java.security.Principal;
 import java.util.*;
@@ -25,12 +25,13 @@ import java.util.*;
 //http协议的Request类
 public class HttpRequest implements HttpServletRequest {
     private HashMap header = new HashMap();
-    //private ParameterMap parameters;
+    private ParameterMap parameterMap;
     private InputStream inputStream;
     private ServletInputStream servletInputStream;
 
     public HttpRequest(InputStream inputStream) {
         this.inputStream = inputStream;
+        parameterMap = new ParameterMap();
     }
 
     @Override
@@ -161,11 +162,6 @@ public class HttpRequest implements HttpServletRequest {
     @Override
     public String[] getParameterValues(String s) {
         return new String[0];
-    }
-
-    @Override
-    public Map getParameterMap() {
-        return null;
     }
 
     @Override
@@ -400,4 +396,26 @@ public class HttpRequest implements HttpServletRequest {
         cookies.add(cookie);
     }
 
+
+    /**
+     * 解析请求字符串为参数Map;当开始使用的时候才开始解析；只解析一次
+     */
+    private void parseParameter(){
+        String charactorCode = getCharacterEncoding();
+        String queryString = getAuthType();
+
+    }
+
+
+    @Override
+    public Map getParameterMap() {
+        if(parameterMap==null){
+            //进行解析
+            parseParameter();
+            parameterMap.setLocked(true);
+        }else{
+            parameterMap.setLocked(true);
+        }
+        return null;
+    }
 }
