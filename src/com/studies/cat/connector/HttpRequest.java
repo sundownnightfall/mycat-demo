@@ -162,16 +162,6 @@ public class HttpRequest implements HttpServletRequest {
     }
 
     @Override
-    public int getContentLength() {
-        return 0;
-    }
-
-    @Override
-    public String getContentType() {
-        return null;
-    }
-
-    @Override
     public ServletInputStream getInputStream() throws IOException {
         return null;
     }
@@ -366,5 +356,30 @@ public class HttpRequest implements HttpServletRequest {
 
     public void setProtocol(String protocol) {
         this.protocol = protocol;
+    }
+
+    /**
+     * content-length属性
+     */
+    private Integer contentLength;
+    @Override
+    public int getContentLength() {
+        return contentLength;
+    }
+
+    public void setContentLength(Integer contentLength) {
+        this.contentLength = contentLength;
+    }
+
+    /**
+     * content-type属性
+     */
+    private String contentType;
+    @Override
+    public String getContentType() {
+        return contentType;
+    }
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 }

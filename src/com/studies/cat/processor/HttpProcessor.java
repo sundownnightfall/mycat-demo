@@ -24,8 +24,6 @@ public class HttpProcessor {
     private HttpRequest httpRequest;
     private HttpResponse httpResponse;
 
-
-    private HttpHeader httpHeader = new HttpHeader();
     public void process(Socket socket){
 
         try{
@@ -197,16 +195,46 @@ public class HttpProcessor {
 
     }
 
-    private void parseHeader(SocketInputStream socketInputStream){
+    private void parseHeader(SocketInputStream socketInputStream) throws ServletException{
         try{
-            socketInputStream.readHeader(httpHeader);
-            //HttpHeader{
-            // name=[a, c, c, e, p, t, :,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ],
-            // nameEnd=6,
-            // value=[t, e, x, t, /, h, t, m, l, ,,  , a, p, p, l, i, c, a, t, i, o, n, /, x, h, t, m, l, +, x, m, l, ,,  , i, m, a, g, e, /, j, x, r, ,,  , *, /, *,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ],
-            // valueEnd=48,
-            // hashCode=0}
-            System.out.println(httpHeader);
+            //一直从流中读取数据
+            while(true){
+                HttpHeader httpHeader = new HttpHeader();
+                socketInputStream.readHeader(httpHeader);
+                System.out.println(httpHeader);
+
+                //检测header是否有数据
+                //HttpHeader{
+                // name=[a, c, c, e, p, t, :,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ],
+                // nameEnd=6,
+                // value=[t, e, x, t, /, h, t, m, l, ,,  , a, p, p, l, i, c, a, t, i, o, n, /, x, h, t, m, l, +, x, m, l, ,,  , i, m, a, g, e, /, j, x, r, ,,  , *, /, *,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ],
+                // valueEnd=48,
+                // hashCode=0}
+                if(httpHeader.nameEnd==0){
+                    if(httpHeader.valueEnd==0){
+                        //已经无法从流中读取到数据了，因为已经读取完毕
+                        break;
+                    }else{
+                        //没有key却有value;这是一种异常 key和value必须成对出现；value可为null
+                        throw new ServletException("请求头中，属性名字必须和值成对出现；不能够存在属性不存在，值存在的情况");
+                    }
+                }
+
+                //检测httpHeader是否是一下几种；如果是，则需要添加至HttpRequest对象中
+                String headerName = new String(httpHeader.name,0,httpHeader.nameEnd);
+                String headerValue = new String(httpHeader.value,0,httpHeader.valueEnd);
+                if(headerName.equalsIgnoreCase("content-length")){
+                    int length = Integer.parseInt(headerValue);
+                    httpRequest.setContentLength(length);
+                }else if(headerName.equalsIgnoreCase("content-type")){
+                    httpRequest.setContentType(headerValue);
+                }else if(headerName.equalsIgnoreCase("cookies")){
+
+                }
+           }
+
+
+
         }catch (IOException ioe){
             ioe.printStackTrace();
         }
