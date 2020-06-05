@@ -78,8 +78,6 @@ public class HttpRequest implements HttpServletRequest {
         return null;
     }
 
-
-
     @Override
     public String getRemoteUser() {
         return null;
