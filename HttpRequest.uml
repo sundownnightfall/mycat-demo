@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.studies.cat.connector.HttpRequest</OriginalElement>
+  <nodes>
+    <node x="-353.0" y="120.0">javax.servlet.ServletRequest</node>
+    <node x="-381.0" y="35.0">javax.servlet.http.HttpServletRequest</node>
+    <node x="-365.0" y="-50.0">com.studies.cat.connector.HttpRequest</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.studies.cat.connector.HttpRequest" target="javax.servlet.http.HttpServletRequest">
+      <point x="0.0" y="-17.5" />
+      <point x="0.0" y="17.5" />
+    </edge>
+    <edge source="javax.servlet.http.HttpServletRequest" target="javax.servlet.ServletRequest">
+      <point x="0.0" y="-17.5" />
+      <point x="0.0" y="17.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="95.0" y="102.5" />
+  <SelectedNodes>
+    <node>javax.servlet.ServletRequest</node>
+    <node>javax.servlet.http.HttpServletRequest</node>
+    <node>com.studies.cat.connector.HttpRequest</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
